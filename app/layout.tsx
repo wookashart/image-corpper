@@ -1,4 +1,8 @@
-import * as React from "react";
+import './globals.css';
+
+import * as React from 'react';
+
+import Navigation from '@/organisms/Navigation/Navigation';
 
 export default function RootLayout({
   children,
@@ -7,7 +11,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className="relative" suppressHydrationWarning={true}>
+        <Navigation />
+        {children}
+      </body>
     </html>
   );
 }

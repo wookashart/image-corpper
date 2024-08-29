@@ -1,3 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  * {
+    @apply text-text-default font-default font-normal text-[16px] leading-normal;
+  }
+
+  body {
+    @apply bg-background-primary;
+  }
+
+  h1 {
+    @apply text-[28px] md:text-[32px] lg:text-[40px] leading-none;
+  }
+}
