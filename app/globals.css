@@ -17,3 +17,21 @@
     @apply text-[28px] md:text-[32px] lg:text-[40px] leading-none;
   }
 }
+
+@layer components {
+  .custom-slider .rc-slider-track {
+    @apply bg-background-secondary;
+  }
+
+  .custom-slider .rc-slider-rail {
+    @apply bg-background-secondary opacity-35;
+  }
+  
+  .custom-slider .rc-slider-handle {
+    @apply bg-background-secondary border-background-secondary hover:border-background-secondary;
+  }
+
+  .custom-slider .rc-slider-handle.rc-slider-handle-dragging {
+    @apply !shadow-[0_0_0_10px_rgba(63,81,181,0.2)] !border-background-secondary;
+  }
+}

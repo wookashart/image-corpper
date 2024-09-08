@@ -1,3 +1,5 @@
+'use client';
+
 const IconHamburger = () => {
   return (
     <svg
