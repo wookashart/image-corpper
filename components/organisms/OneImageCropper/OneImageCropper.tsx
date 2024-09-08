@@ -62,6 +62,9 @@ const OneImageCropper: FC<IOneImageCropper> = () => {
           imageSrc={imageSrc as string}
           zoom={zoom}
           rotation={rotation}
+          frame={frame.value}
+          dere={dere.value}
+          stats={frameStats}
           handlePreviewUpdate={(croppedAreaPixels: Area) =>
             setCroppedAreaPixels(croppedAreaPixels)
           }
