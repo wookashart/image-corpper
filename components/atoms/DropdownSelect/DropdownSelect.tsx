@@ -9,11 +9,14 @@ const DropdownSelect: FC<IDropdownSelect> = ({
   label,
   options,
   value,
+  inline = false,
   handleChange,
 }) => {
   return (
-    <div className="flex gap-2 items-center">
-      <label className="text-text-default min-w-[50px]">{label}</label>
+    <div className={`flex items-center ${!inline ? 'gap-2' : 'gap-5'}`}>
+      <label className={`text-text-default ${!inline && 'min-w-[50px]'}`}>
+        {label}
+      </label>
       <Select
         value={value}
         options={options}

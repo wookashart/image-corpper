@@ -14,6 +14,7 @@ import FileInput from '@/atoms/FileInput/FileInput';
 import IconDownload from '@/atoms/Icons/IconDownload';
 import IconReset from '@/atoms/Icons/IconReset';
 import getCroppedImg from '@/lib/cropper';
+import { dereOptions, frameOptions } from '@/lib/helpers';
 import ImageCropper from '@/molecules/ImageCropper/ImageCropper';
 import { IOneImageCropper } from '@/organisms/OneImageCropper/OneImageCropper.d';
 
@@ -22,11 +23,8 @@ const OneImageCropper: FC<IOneImageCropper> = () => {
   const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area | null>(null);
   const [zoom, setZoom] = useState<number>(1);
   const [rotation, setRotation] = useState<number>(0);
-  const [frame, setFrame] = useState<IOption>({
-    label: 'None',
-    value: 'none',
-  });
-  const [dere, setDere] = useState<IOption>({ label: 'None', value: 'none' });
+  const [frame, setFrame] = useState<IOption>(frameOptions[0]);
+  const [dere, setDere] = useState<IOption>(dereOptions[0]);
   const [frameStats, setFrameStats] = useState<boolean>(false);
 
   const handleSelectFile = (e: ChangeEvent<HTMLInputElement>) => {
@@ -121,36 +119,13 @@ const OneImageCropper: FC<IOneImageCropper> = () => {
             label="Frame"
             value={frame}
             handleChange={(value: IOption) => setFrame(value)}
-            options={[
-              { value: 'none', label: 'None' },
-              { value: 'E', label: 'E' },
-              { value: 'D', label: 'D' },
-              { value: 'C', label: 'C' },
-              { value: 'B', label: 'B' },
-              { value: 'A', label: 'A' },
-              { value: 'S', label: 'S' },
-              { value: 'SS', label: 'SS' },
-              { value: 'SSS', label: 'SSS' },
-            ]}
+            options={frameOptions}
           />
           <DropdownSelect
             label="Dere"
             value={dere}
             handleChange={(value: IOption) => setDere(value)}
-            options={[
-              { value: 'none', label: 'None' },
-              { value: 'Bodere', label: 'Bodere' },
-              { value: 'Dandere', label: 'Dandere' },
-              { value: 'Deredere', label: 'Deredere' },
-              { value: 'Kamidere', label: 'Kamidere' },
-              { value: 'Kuudere', label: 'Kuudere' },
-              { value: 'Mayadere', label: 'Mayadere' },
-              { value: 'Tsundere', label: 'Tsundere' },
-              { value: 'Yandere', label: 'Yandere' },
-              { value: 'Raito', label: 'Raito' },
-              { value: 'Yami', label: 'Yami' },
-              { value: 'Yato', label: 'Yato' },
-            ]}
+            options={dereOptions}
           />
           <Checkbox
             id="frame-stats"

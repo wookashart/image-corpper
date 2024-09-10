@@ -62,10 +62,10 @@ const Navigation = () => {
               One image
             </Link>
             <Link
-              href="/many"
+              href="/multiple"
               className="text-left text-2xl transition-all duration-300 ease-in-out hover:text-text-default-hover"
             >
-              Many images
+              Multiple images
             </Link>
           </nav>
         </button>
