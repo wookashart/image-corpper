@@ -30,6 +30,7 @@ const DropdownSelect: FC<IDropdownSelect> = ({
             state.isSelected
               ? '!text-text-default !bg-background-secondary'
               : '!text-text-default-negative',
+          menu: () => '!z-50',
         }}
         onChange={handleChange}
       />

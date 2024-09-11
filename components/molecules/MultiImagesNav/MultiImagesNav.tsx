@@ -2,6 +2,7 @@
 
 import { FC } from 'react';
 
+import Checkbox from '@/atoms/Checkbox/Checkbox';
 import DropdownSelect from '@/atoms/DropdownSelect/DropdownSelect';
 import FileInput from '@/atoms/FileInput/FileInput';
 import { dereOptions, frameOptions } from '@/lib/helpers';
@@ -10,9 +11,11 @@ import { IMultiImagesNav } from '@/molecules/MultiImagesNav/MultiImagesNav.d';
 const MultiImagesNav: FC<IMultiImagesNav> = ({
   dere,
   frame,
+  frameStats,
   handleSelectFiles,
   handleSelectDere,
   handleSelectFrame,
+  handleToggleStats,
 }) => {
   return (
     <div className="container mx-auto mt-[10px] md:mt-[30px] flex gap-3 md:gap-10 justify-center flex-wrap">
@@ -33,6 +36,14 @@ const MultiImagesNav: FC<IMultiImagesNav> = ({
           value={dere}
           options={dereOptions}
           handleChange={handleSelectDere}
+        />
+      </div>
+      <div className="min-w-[200px] flex items-center">
+        <Checkbox
+          id="frame-stats"
+          label="Show statistics"
+          value={frameStats}
+          handleChange={() => handleToggleStats(!frameStats)}
         />
       </div>
     </div>

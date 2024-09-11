@@ -25,6 +25,7 @@ module.exports = {
           primary: '#20232a',
           secondary: '#3f51b5',
           disabled: '#808080',
+          error: '#ae2525'
         }
       }
     },
