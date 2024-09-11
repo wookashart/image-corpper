@@ -25,7 +25,8 @@ module.exports = {
           primary: '#20232a',
           secondary: '#3f51b5',
           disabled: '#808080',
-          error: '#ae2525'
+          error: '#ae2525',
+          modal: 'rgba(0, 0, 0, 0.7)',
         }
       }
     },

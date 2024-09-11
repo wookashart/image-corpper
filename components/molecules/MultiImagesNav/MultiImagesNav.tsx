@@ -18,10 +18,11 @@ const MultiImagesNav: FC<IMultiImagesNav> = ({
   handleToggleStats,
 }) => {
   return (
-    <div className="container mx-auto mt-[10px] md:mt-[30px] flex gap-3 md:gap-10 justify-center flex-wrap">
+    <div className="container mx-auto mt-[10px] md:mt-[30px] flex gap-3 md:gap-10 justify-center flex-wrap relative z-[9999]">
       <FileInput multiple handleChange={handleSelectFiles} />
       <div className="min-w-[200px]">
         <DropdownSelect
+          id="multi-nav-frame-select"
           inline
           label="Frame"
           value={frame}
@@ -31,6 +32,7 @@ const MultiImagesNav: FC<IMultiImagesNav> = ({
       </div>
       <div className="min-w-[200px]">
         <DropdownSelect
+          id="multi-nav-dere-select"
           inline
           label="Dere"
           value={dere}
@@ -40,7 +42,7 @@ const MultiImagesNav: FC<IMultiImagesNav> = ({
       </div>
       <div className="min-w-[200px] flex items-center">
         <Checkbox
-          id="frame-stats"
+          id="multi-nav-frame-stats"
           label="Show statistics"
           value={frameStats}
           handleChange={() => handleToggleStats(!frameStats)}

@@ -1,4 +1,5 @@
 export interface IDropdownSelect {
+  id: string;
   label: string;
   value: IOption;
   options: IOption[];

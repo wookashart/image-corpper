@@ -50,7 +50,7 @@ const Navigation = () => {
           open: { opacity: 1, x: 0 },
           close: { opacity: 0, x: '-100%' },
         }}
-        className="fixed top-0 left-0 bottom-0 py-5 pl-5 pr-16 bg-background-primary shadow-[0_0_10px_3px_rgba(0,0,0,0.4)] opacity-0 z-10"
+        className="fixed top-0 left-0 bottom-0 py-5 pl-5 pr-16 bg-background-primary shadow-[0_0_10px_3px_rgba(0,0,0,0.4)] opacity-0 z-[99999]"
       >
         <button className="outline-none" onClick={() => setOpen(false)}>
           <IconClose />

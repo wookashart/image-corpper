@@ -7,7 +7,6 @@ import Cropper, { Area, Point } from 'react-easy-crop';
 const ImageCropper: FC<IImageCropper> = ({
   imageSrc,
   zoom,
-  rotation,
   frame = 'none',
   dere = 'none',
   stats = false,
@@ -21,7 +20,7 @@ const ImageCropper: FC<IImageCropper> = ({
 
   const handleCropChange = (crop: Point) => setCrop(crop);
   const handleCropComplete = (croppedArea: Area, croppedAreaPixels: Area) => {
-    handlePreviewUpdate(croppedAreaPixels);
+    handlePreviewUpdate(croppedArea, croppedAreaPixels);
   };
 
   return (
@@ -31,7 +30,6 @@ const ImageCropper: FC<IImageCropper> = ({
         crop={crop}
         cropSize={{ width: 448, height: 640 }}
         zoom={zoom}
-        rotation={rotation}
         showGrid={false}
         onCropChange={handleCropChange}
         onCropComplete={handleCropComplete}

@@ -1,4 +1,5 @@
 import { IOption } from "@/atoms/DropdownSelect/DropdownSelect.d";
+import { Area } from "react-easy-crop";
 
 export interface IMultiImagesPreview {
   imagesSrc: string[];
@@ -6,4 +7,5 @@ export interface IMultiImagesPreview {
   dere: IOption;
   stats: boolean;
   handleRemoveFromPreview: (index: number) => void;
+  handleUpdateCroppedAreaPixels: (index: number, croppedAreaPixels: Area) => void;
 }

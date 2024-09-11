@@ -6,6 +6,7 @@ import Select from 'react-select';
 import { IDropdownSelect } from '@/atoms/DropdownSelect/DropdownSelect.d';
 
 const DropdownSelect: FC<IDropdownSelect> = ({
+  id,
   label,
   options,
   value,
@@ -18,6 +19,7 @@ const DropdownSelect: FC<IDropdownSelect> = ({
         {label}
       </label>
       <Select
+        id={id}
         value={value}
         options={options}
         classNames={{
@@ -30,7 +32,7 @@ const DropdownSelect: FC<IDropdownSelect> = ({
             state.isSelected
               ? '!text-text-default !bg-background-secondary'
               : '!text-text-default-negative',
-          menu: () => '!z-50',
+          // menu: () => 'z-50',
         }}
         onChange={handleChange}
       />

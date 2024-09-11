@@ -11,22 +11,20 @@ const MultiImagesPreview: FC<IMultiImagesPreview> = ({
   dere,
   stats,
   handleRemoveFromPreview,
+  handleUpdateCroppedAreaPixels,
 }) => {
-  const handleOpenImgSettings = (index: number) => {
-    console.log(index);
-  };
-
   return (
     <div className="container my-[50px] mx-auto flex flex-wrap gap-5 justify-center">
       {imagesSrc.map((img: string, index: number) => (
         <ImagePreview
-          key={index}
+          key={img}
           img={img}
           frame={frame.value}
           dere={dere.value}
           stats={stats}
+          index={index}
           handleRemove={() => handleRemoveFromPreview(index)}
-          handleOpenSettings={() => handleOpenImgSettings(index)}
+          handleUpdateCroppedAreaPixels={handleUpdateCroppedAreaPixels}
         />
       ))}
     </div>

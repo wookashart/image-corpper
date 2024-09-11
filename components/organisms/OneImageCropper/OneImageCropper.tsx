@@ -22,7 +22,6 @@ const OneImageCropper: FC<IOneImageCropper> = () => {
   const [imageSrc, setImageSrc] = useState<string | ArrayBuffer | null>(null);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area | null>(null);
   const [zoom, setZoom] = useState<number>(1);
-  const [rotation, setRotation] = useState<number>(0);
   const [frame, setFrame] = useState<IOption>(frameOptions[0]);
   const [dere, setDere] = useState<IOption>(dereOptions[0]);
   const [frameStats, setFrameStats] = useState<boolean>(false);
@@ -37,17 +36,15 @@ const OneImageCropper: FC<IOneImageCropper> = () => {
 
   const handleSaveImage = () => {
     try {
-      getCroppedImg(
-        imageSrc as string,
-        croppedAreaPixels as Area,
-        rotation,
-      ).then((image: string) => {
-        download(
-          image,
-          `image-${format(new Date(), 'yyyyMMddHHmmss')}`,
-          'image/jpeg',
-        );
-      });
+      getCroppedImg(imageSrc as string, croppedAreaPixels as Area, 0).then(
+        (image: string) => {
+          download(
+            image,
+            `image-${format(new Date(), 'yyyyMMddHHmmss')}`,
+            'image/jpeg',
+          );
+        },
+      );
     } catch (error) {
       console.error(error);
     }
@@ -59,7 +56,6 @@ const OneImageCropper: FC<IOneImageCropper> = () => {
         <ImageCropper
           imageSrc={imageSrc as string}
           zoom={zoom}
-          rotation={rotation}
           frame={frame.value}
           dere={dere.value}
           stats={frameStats}
@@ -94,34 +90,19 @@ const OneImageCropper: FC<IOneImageCropper> = () => {
               <IconReset />
             </Button>
           </div>
-          <div className="flex gap-5 items-center">
-            <div className="flex-1">
-              <Slider
-                label="Rotation"
-                value={rotation}
-                min={-180}
-                max={180}
-                step={1}
-                handleChange={(value: number | number[]) =>
-                  setRotation(value as number)
-                }
-              />
-            </div>
-            <Button handleClick={() => setRotation(0)}>
-              <IconReset />
-            </Button>
-          </div>
         </div>
 
         <div className="flex flex-col gap-2">
           <p className="text-text-default underline">Frame customization:</p>
           <DropdownSelect
+            id="single-frame-select"
             label="Frame"
             value={frame}
             handleChange={(value: IOption) => setFrame(value)}
             options={frameOptions}
           />
           <DropdownSelect
+            id="single-dere-select"
             label="Dere"
             value={dere}
             handleChange={(value: IOption) => setDere(value)}
