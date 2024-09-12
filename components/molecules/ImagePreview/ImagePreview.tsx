@@ -2,6 +2,7 @@
 
 import { FC, useState } from 'react';
 import { Area } from 'react-easy-crop';
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 
 import Button from '@/atoms/Button/Button';
 import IconDownload from '@/atoms/Icons/IconDownload';
@@ -26,11 +27,15 @@ const ImagePreview: FC<IImagePreview> = ({
   const [modalOpened, setModalOpened] = useState<boolean>(false);
 
   return (
-    <>
+    <SkeletonTheme baseColor="#313131" highlightColor="#525252">
       <div className="group relative" key={img}>
-        <div className="relative border-[1px] border-background-secondary border-solid">
-          {!!croppedArea && (
+        <div
+          className={`relative ${!!croppedArea && 'border-[1px] border-background-secondary border-solid'}`}
+        >
+          {!!croppedArea ? (
             <PreviewOutput imgSrc={img} croppedArea={croppedArea} />
+          ) : (
+            <Skeleton className="!rounded-none !w-[220px] !h-[309px]" />
           )}
 
           {frame !== 'none' && (
@@ -95,7 +100,7 @@ const ImagePreview: FC<IImagePreview> = ({
         handleUpdateCroppedAreaPixels={handleUpdateCroppedAreaPixels}
         handleCloseModal={() => setModalOpened(false)}
       />
-    </>
+    </SkeletonTheme>
   );
 };
 

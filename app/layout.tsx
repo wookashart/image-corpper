@@ -1,3 +1,5 @@
+import 'react-loading-skeleton/dist/skeleton.css';
+
 import './globals.css';
 
 import * as React from 'react';

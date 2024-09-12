@@ -31,6 +31,7 @@ const PreviewOutput: FC<IPreviewOutput> = ({ imgSrc, croppedArea }) => {
         alt=""
         style={imageStyle}
         className="absolute top-0 left-0 origin-top-left max-w-none max-h-none"
+        loading="lazy"
       />
     </div>
   );
