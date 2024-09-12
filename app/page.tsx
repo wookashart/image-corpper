@@ -1,6 +1,11 @@
+import { Metadata } from 'next';
 import * as React from 'react';
 
 import OneImageCropper from '@/organisms/OneImageCropper/OneImageCropper';
+
+export const metadata: Metadata = {
+  title: 'One image | Image cropper',
+};
 
 export default function Page() {
   return (

@@ -1,6 +1,11 @@
+import { Metadata } from 'next';
 import * as React from 'react';
 
 import MultipleImagesCropper from '@/organisms/MultipleImagesCropper/MultipleImagesCropper';
+
+export const metadata: Metadata = {
+  title: 'Multiple images | Image cropper',
+};
 
 export default function Page() {
   return (
