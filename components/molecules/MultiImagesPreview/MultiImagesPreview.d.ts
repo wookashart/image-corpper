@@ -8,4 +8,5 @@ export interface IMultiImagesPreview {
   stats: boolean;
   handleRemoveFromPreview: (index: number) => void;
   handleUpdateCroppedAreaPixels: (index: number, croppedAreaPixels: Area) => void;
+  handleSaveImage: (index: number) => void
 }

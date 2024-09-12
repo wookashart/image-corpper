@@ -12,6 +12,7 @@ const MultiImagesPreview: FC<IMultiImagesPreview> = ({
   stats,
   handleRemoveFromPreview,
   handleUpdateCroppedAreaPixels,
+  handleSaveImage,
 }) => {
   return (
     <div className="container my-[50px] mx-auto flex flex-wrap gap-5 justify-center">
@@ -25,6 +26,7 @@ const MultiImagesPreview: FC<IMultiImagesPreview> = ({
           index={index}
           handleRemove={() => handleRemoveFromPreview(index)}
           handleUpdateCroppedAreaPixels={handleUpdateCroppedAreaPixels}
+          handleSaveImage={handleSaveImage}
         />
       ))}
     </div>

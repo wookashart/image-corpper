@@ -4,6 +4,7 @@ import { FC, useState } from 'react';
 import { Area } from 'react-easy-crop';
 
 import Button from '@/atoms/Button/Button';
+import IconDownload from '@/atoms/Icons/IconDownload';
 import IconSettings from '@/atoms/Icons/IconSettings';
 import IconTrash from '@/atoms/Icons/IconTrash';
 import PreviewOutput from '@/atoms/PreviewOutput/PreviewOutput';
@@ -19,6 +20,7 @@ const ImagePreview: FC<IImagePreview> = ({
   index,
   handleRemove,
   handleUpdateCroppedAreaPixels,
+  handleSaveImage,
 }) => {
   const [croppedArea, setCroppedArea] = useState<Area | null>(null);
   const [modalOpened, setModalOpened] = useState<boolean>(false);
@@ -68,6 +70,9 @@ const ImagePreview: FC<IImagePreview> = ({
           )}
         </div>
         <div className="flex gap-2 absolute top-[5px] left-[5px] z-20 opacity-0 invisible transition-all duration-300 ease-in-out group-hover:opacity-100 group-hover:visible">
+          <Button handleClick={() => handleSaveImage(index)}>
+            <IconDownload />
+          </Button>
           <Button handleClick={() => setModalOpened(true)}>
             <IconSettings />
           </Button>

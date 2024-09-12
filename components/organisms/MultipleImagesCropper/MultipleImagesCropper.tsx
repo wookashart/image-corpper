@@ -1,9 +1,12 @@
 'use client';
 
+import { format } from 'date-fns';
+import download from 'downloadjs';
 import { ChangeEvent, FC, useState } from 'react';
 import { Area } from 'react-easy-crop';
 
 import { IOption } from '@/atoms/DropdownSelect/DropdownSelect.d';
+import getCroppedImg from '@/lib/cropper';
 import { dereOptions, frameOptions } from '@/lib/helpers';
 import MultiImagesNav from '@/molecules/MultiImagesNav/MultiImagesNav';
 import MultiImagesPreview from '@/molecules/MultiImagesPreview/MultiImagesPreview';
@@ -22,6 +25,10 @@ const MultipleImagesCropper: FC<IMultipleImagesCropper> = () => {
         const reader = new FileReader();
         reader.addEventListener('load', () => {
           setImagesSrc(oldState => [...oldState, reader.result] as string[]);
+          setCroppedAreasPixels(oldState => [
+            ...oldState,
+            { width: 0, height: 0, x: 0, y: 0 },
+          ]);
         });
         reader.readAsDataURL(file);
       });
@@ -41,17 +48,27 @@ const MultipleImagesCropper: FC<IMultipleImagesCropper> = () => {
     index: number,
     croppedAreaPixels: Area,
   ) => {
-    const newCroppedAreasPixels: Area[] = [];
+    setCroppedAreasPixels(oldState => {
+      oldState[index] = croppedAreaPixels;
 
-    croppedAreasPixels.forEach((area: Area, idx: number) => {
-      if (idx === index) {
-        newCroppedAreasPixels.push(croppedAreaPixels);
-      } else {
-        newCroppedAreasPixels.push(area);
-      }
+      return oldState;
     });
+  };
 
-    setCroppedAreasPixels(newCroppedAreasPixels);
+  const handleSaveImage = (index: number) => {
+    try {
+      getCroppedImg(imagesSrc[index], croppedAreasPixels[index], 0).then(
+        (image: string) => {
+          download(
+            image,
+            `image-${index + 1}-${format(new Date(), 'yyyyMMddHHmmss')}`,
+            'image/jpeg',
+          );
+        },
+      );
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -73,6 +90,7 @@ const MultipleImagesCropper: FC<IMultipleImagesCropper> = () => {
         stats={frameStats}
         handleRemoveFromPreview={handleRemoveFromPreview}
         handleUpdateCroppedAreaPixels={handleUpdateCroppedAreaPixels}
+        handleSaveImage={handleSaveImage}
       />
     </div>
   );

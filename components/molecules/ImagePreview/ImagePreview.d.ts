@@ -8,4 +8,5 @@ export interface IImagePreview {
   index: number;
   handleRemove: () => void;
   handleUpdateCroppedAreaPixels: (index: number, croppedAreaPixels: Area) => void;
+  handleSaveImage: (index: number) => void;
 }
