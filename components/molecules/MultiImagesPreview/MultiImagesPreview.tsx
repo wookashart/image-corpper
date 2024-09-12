@@ -15,20 +15,25 @@ const MultiImagesPreview: FC<IMultiImagesPreview> = ({
   handleSaveImage,
 }) => {
   return (
-    <div className="container my-[50px] mx-auto flex flex-wrap gap-5 justify-center">
-      {imagesSrc.map((img: string, index: number) => (
-        <ImagePreview
-          key={img}
-          img={img}
-          frame={frame.value}
-          dere={dere.value}
-          stats={stats}
-          index={index}
-          handleRemove={() => handleRemoveFromPreview(index)}
-          handleUpdateCroppedAreaPixels={handleUpdateCroppedAreaPixels}
-          handleSaveImage={handleSaveImage}
-        />
-      ))}
+    <div className="container mt-[10px] mb-[50px] mx-auto">
+      <p className="mb-[30px] text-center text-sm">
+        Images uploaded: {imagesSrc.length}
+      </p>
+      <div className="flex flex-wrap gap-5 justify-center">
+        {imagesSrc.map((img: string, index: number) => (
+          <ImagePreview
+            key={img}
+            img={img}
+            frame={frame.value}
+            dere={dere.value}
+            stats={stats}
+            index={index}
+            handleRemove={() => handleRemoveFromPreview(index)}
+            handleUpdateCroppedAreaPixels={handleUpdateCroppedAreaPixels}
+            handleSaveImage={handleSaveImage}
+          />
+        ))}
+      </div>
     </div>
   );
 };
