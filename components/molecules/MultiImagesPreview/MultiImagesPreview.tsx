@@ -3,10 +3,15 @@
 import { FC } from 'react';
 
 import ImagePreview from '@/molecules/ImagePreview/ImagePreview';
-import { IMultiImagesPreview } from '@/molecules/MultiImagesPreview/MultiImagesPreview.d';
+import {
+  IMultiImagesPreview,
+  type ImageItem,
+} from '@/molecules/MultiImagesPreview/MultiImagesPreview.d';
+
+export type { ImageItem };
 
 const MultiImagesPreview: FC<IMultiImagesPreview> = ({
-  imagesSrc,
+  images,
   frame,
   dere,
   stats,
@@ -17,13 +22,13 @@ const MultiImagesPreview: FC<IMultiImagesPreview> = ({
   return (
     <div className="container mt-[10px] mb-[50px] mx-auto">
       <p className="mb-[30px] text-center text-sm">
-        Images uploaded: {imagesSrc.length}
+        Images uploaded: {images.length}
       </p>
       <div className="flex flex-wrap gap-5 justify-center">
-        {imagesSrc.map((img: string, index: number) => (
+        {images.map((item, index) => (
           <ImagePreview
-            key={img}
-            img={img}
+            key={item.id}
+            img={item.src}
             frame={frame.value}
             dere={dere.value}
             stats={stats}
