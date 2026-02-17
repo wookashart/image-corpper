@@ -1,41 +1,33 @@
 'use client';
 
-import { FC } from 'react';
-import Select from 'react-select';
+import dynamic from 'next/dynamic';
 
 import { IDropdownSelect } from '@/atoms/DropdownSelect/DropdownSelect.d';
 
-const DropdownSelect: FC<IDropdownSelect> = ({
-  id,
+const DropdownSelectClient = dynamic(
+  () => import('./DropdownSelectClient').then(mod => mod.default),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="flex flex-1 items-center gap-2">
+        <span className="min-w-[50px] opacity-0">…</span>
+        <div className="h-[38px] flex-1 rounded-none border border-gray-300 bg-gray-100" />
+      </div>
+    ),
+  }
+);
+
+const DropdownSelect: React.FC<IDropdownSelect> = ({
   label,
-  options,
-  value,
   inline = false,
-  handleChange,
+  ...rest
 }) => {
   return (
     <div className={`flex items-center ${!inline ? 'gap-2' : 'gap-5'}`}>
       <label className={`text-text-default ${!inline && 'min-w-[50px]'}`}>
         {label}
       </label>
-      <Select
-        id={id}
-        value={value}
-        options={options}
-        classNames={{
-          container: () => 'flex-1',
-          control: () =>
-            '!rounded-none hover:!border-background-secondary !shadow-none transition-all duration-300 ease-in-out',
-          dropdownIndicator: () => '[&>svg]:!fill-background-secondary',
-          indicatorSeparator: () => 'hidden',
-          option: state =>
-            state.isSelected
-              ? '!text-text-default !bg-background-secondary'
-              : '!text-text-default-negative',
-          // menu: () => 'z-50',
-        }}
-        onChange={handleChange}
-      />
+      <DropdownSelectClient label={label} inline={inline} {...rest} />
     </div>
   );
 };
