@@ -1,0 +1,30 @@
+---
+description: Kontekst projektu image-corpper – stack, struktura, aliasy
+alwaysApply: true
+---
+
+# Projekt image-corpper
+
+## Stack
+- **Next.js 14** (App Router), **React 18**, **TypeScript**
+- **Tailwind CSS** (design tokens w `tailwind.config.js`: `text-default`, `background-primary`, itd.)
+- **Prettier** (singleQuote, semi, printWidth 80, trailingComma all) + **ESLint** (Next, TypeScript, Prettier)
+- Zależności: `react-easy-crop`, `framer-motion`, `rc-slider`, `react-select`, `clsx`, `downloadjs`
+
+## Struktura
+- **App**: `app/` (layout, page, multiple/page, error, globals.css)
+- **Atomic Design**: `components/atoms/` → `components/molecules/` → `components/organisms/`
+- **Lib**: `lib/` (cropper.ts, helpers.ts) – logika crop i stałe
+- **Public**: `public/images/` (border, dere, stats)
+
+## Aliasy ścieżek (tsconfig)
+Używaj **krótkich** aliasów, nie `@/components/...`:
+- `@/atoms/*` → components/atoms
+- `@/molecules/*` → components/molecules  
+- `@/organisms/*` → components/organisms
+- `@/lib/*` → lib
+- `@/types/*` → types
+- `@/assets/*` → assets
+
+## Uruchomienie
+`yarn` → `yarn dev` (localhost:3000). Lint: `yarn lint`, format: `yarn prettier`.

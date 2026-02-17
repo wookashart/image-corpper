@@ -1,0 +1,20 @@
+---
+description: Aliasy importów i kolejność (TypeScript/TSX)
+globs: "**/*.ts,**/*.tsx"
+alwaysApply: false
+---
+
+# Importy TypeScript
+
+## Aliasy – zawsze krótka forma
+- ✅ `@/atoms/Button/Button`, `@/molecules/ImageCropper/ImageCropper`, `@/lib/cropper`
+- ❌ `@/components/atoms/Button/Button` (nie używać `components` w ścieżce)
+
+## Kolejność importów (Prettier + import-sort)
+1. Zewnętrzne (np. `react`, `react-easy-crop`)
+2. Wewnętrzne z aliasami: `@/atoms`, `@/molecules`, `@/organisms`, `@/lib`, `@/types`, `@/assets`
+- Interfejsy z pliku `.d`: `import { IButton } from '@/atoms/Button/Button.d';`
+
+## Inne
+- Nieużywane zmienne: prefix `_` (np. `_unused`) – zgodnie z ESLint.
+- `no-console`: unikać lub używać oszczędnie (ESLint: warn).
