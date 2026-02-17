@@ -6,7 +6,6 @@ import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 
 import Button from '@/atoms/Button/Button';
 import IconDownload from '@/atoms/Icons/IconDownload';
-import IconSettings from '@/atoms/Icons/IconSettings';
 import IconTrash from '@/atoms/Icons/IconTrash';
 import PreviewOutput from '@/atoms/PreviewOutput/PreviewOutput';
 import { IImagePreview } from '@/molecules/ImagePreview/ImagePreview.d';
@@ -30,7 +29,11 @@ const ImagePreview: FC<IImagePreview> = ({
     <SkeletonTheme baseColor="#313131" highlightColor="#525252">
       <div className="group relative" key={img}>
         <div
-          className={`relative ${!!croppedArea && 'border-[1px] border-background-secondary border-solid'}`}
+          role="button"
+          tabIndex={0}
+          className={`relative cursor-pointer ${!!croppedArea && 'border-[1px] border-background-secondary border-solid'}`}
+          onClick={() => setModalOpened(true)}
+          onKeyDown={(e) => e.key === 'Enter' && setModalOpened(true)}
         >
           {!!croppedArea ? (
             <PreviewOutput imgSrc={img} croppedArea={croppedArea} />
@@ -77,9 +80,6 @@ const ImagePreview: FC<IImagePreview> = ({
         <div className="flex gap-2 absolute top-[5px] left-[5px] z-20 opacity-0 invisible transition-all duration-300 ease-in-out group-hover:opacity-100 group-hover:visible">
           <Button handleClick={() => handleSaveImage(index)}>
             <IconDownload />
-          </Button>
-          <Button handleClick={() => setModalOpened(true)}>
-            <IconSettings />
           </Button>
           <Button
             variant="error"
