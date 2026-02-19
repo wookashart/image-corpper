@@ -1,4 +1,4 @@
-import { Area } from "react-easy-crop";
+import { Area } from 'react-easy-crop';
 
 const createImage = (url: string) =>
   new Promise((resolve, reject) => {
@@ -19,10 +19,18 @@ function getRadianAngle(degreeValue: number) {
  * @param {Object} pixelCrop - pixelCrop Object provided by react-easy-crop
  * @param {number} rotation - optional rotation parameter
  */
-export default async function getCroppedImg(imageSrc: string, pixelCrop: Area, rotation = 0) {
+export default async function getCroppedImg(
+  imageSrc: string,
+  pixelCrop: Area,
+  rotation = 0,
+) {
   const image: any = await createImage(imageSrc);
   const canvas: any = document.createElement('canvas');
   const ctx: any = canvas.getContext('2d');
+
+  // maksymalna jakość przy rysowaniu i skalowaniu
+  ctx.imageSmoothingEnabled = true;
+  ctx.imageSmoothingQuality = 'high';
 
   const maxSize = Math.max(image.width, image.height);
   const safeArea = 2 * ((maxSize / 2) * Math.sqrt(2));
@@ -38,20 +46,28 @@ export default async function getCroppedImg(imageSrc: string, pixelCrop: Area, r
   ctx.translate(-safeArea / 2, -safeArea / 2);
 
   // draw rotated image and store data.
-  ctx.drawImage(image, safeArea / 2 - image.width * 0.5, safeArea / 2 - image.height * 0.5);
+  ctx.drawImage(
+    image,
+    safeArea / 2 - image.width * 0.5,
+    safeArea / 2 - image.height * 0.5,
+  );
   const data = ctx.getImageData(0, 0, safeArea, safeArea);
 
   // set canvas width to final desired crop size - this will clear existing context
   canvas.width = pixelCrop.width;
   canvas.height = pixelCrop.height;
 
+  // przywróć ustawienia jakości po resize canvas (getContext się resetuje)
+  ctx.imageSmoothingEnabled = true;
+  ctx.imageSmoothingQuality = 'high';
+
   // paste generated rotate image with correct offsets for x,y crop values.
   ctx.putImageData(
     data,
     Math.round(0 - safeArea / 2 + image.width * 0.5 - pixelCrop.x),
-    Math.round(0 - safeArea / 2 + image.height * 0.5 - pixelCrop.y)
+    Math.round(0 - safeArea / 2 + image.height * 0.5 - pixelCrop.y),
   );
 
-  // As Base64 string
-  return canvas.toDataURL('image/jpeg');
+  // JPEG z maksymalną jakością (1.0 = 100%)
+  return canvas.toDataURL('image/jpeg', 1);
 }
